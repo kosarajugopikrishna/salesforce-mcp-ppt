@@ -1,8 +1,14 @@
 {
   "name": "sfdc-mcp",
-  "type": "module",
+  "version": "1.0.0",
+  "description": "Salesforce MCP Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.0",
+    "express": "^4.21.2",
     "pptxgenjs": "^3.12.0"
   }
 }
