@@ -1,32 +1,27 @@
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+const express = require("express");
+const PptxGenJS = require("pptxgenjs");
 
-const server = new Server(
-  {
-    name: "ppt-generator",
-    version: "1.0.0"
-  },
-  {
-    capabilities: {
-      tools: {}
-    }
-  }
-);
+const app = express();
 
-server.tool(
-  "generate_ppt",
-  "Generate PowerPoint presentation",
-  async () => {
-    return {
-      content: [
-        {
-          type: "text",
-          text: "PPT generated"
-        }
-      ]
-    };
-  }
-);
+app.use(express.json());
 
-const transport = new StdioServerTransport();
-await server.connect(transport);
+app.get("/", (req, res) => {
+    res.send("Salesforce MCP Server Running");
+});
+
+app.get("/mcp", (req, res) => {
+    res.json({
+        tools: [
+            {
+                name: "generate_ppt",
+                description: "Generate a PowerPoint presentation"
+            }
+        ]
+    });
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
