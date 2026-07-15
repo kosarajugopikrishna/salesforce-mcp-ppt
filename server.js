@@ -129,8 +129,10 @@ app.post("/generate_ppt", async (req, res) => {
             fileName: filePath
         });
 
+        
         const baseUrl =
-            `${req.protocol}://${req.get("host")}`;
+        `https://${req.get("host")}`;
+
 
         const downloadUrl =
             `${baseUrl}/files/${fileName}`;
